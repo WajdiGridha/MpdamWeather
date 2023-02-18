@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView t1_temp, t2_city, t3_weather_type, description_textView;
     private TextView wind_speed_textView, humidity_textView, visibility_textView, search_city_bn;
-    private Button citySearchButton;
+
     private EditText cityEditText;
     String cityName;
     LocationManager locationManager;
@@ -139,7 +139,7 @@ public class MainActivity extends AppCompatActivity {
         if (requestCode == PERMISSION_CODE){
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
                 Toast.makeText(this, "Permission Granted", Toast.LENGTH_SHORT).show();
-                //dialog.dismiss();
+
             }else {
                 Toast.makeText(this, "Please give me permission", Toast.LENGTH_SHORT).show();
                 finish();
@@ -209,12 +209,6 @@ public class MainActivity extends AppCompatActivity {
                     String humidity = main_object.getString("humidity");
                     humidity_textView.setText(humidity + "%");
 
-
-//                    Calendar calendar = Calendar.getInstance();
-//                    SimpleDateFormat sdf = new SimpleDateFormat("EEEE");
-//                    String formatted_date = sdf.format(calendar.getTime());
-//
-//                    t4_date.setText(formatted_date);
 
                     double temp_int = Double.parseDouble(temp) - 273.15;
                     int i = (int) Math.round(temp_int);
