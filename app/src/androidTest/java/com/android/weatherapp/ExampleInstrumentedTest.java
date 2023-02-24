@@ -1,4 +1,4 @@
-package com.topurayhan.weather;
+package com.android.weatherapp;
 
 import android.content.Context;
 

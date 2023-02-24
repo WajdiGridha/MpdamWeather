@@ -1,15 +1,9 @@
-package com.topurayhan.weather;
+package com.android.weatherapp;
 
 import static android.app.PendingIntent.getActivity;
-import static android.content.Context.MODE_PRIVATE;
-
-import static java.security.AccessController.getContext;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.SharedPreferences;
-import android.location.Location;
-import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.util.Log;

@@ -6,7 +6,7 @@ android {
     compileSdk 32
 
     defaultConfig {
-        applicationId "com.topurayhan.weather"
+        applicationId "com.android.weatherapp"
         minSdk 16
         targetSdk 32
         versionCode 1
