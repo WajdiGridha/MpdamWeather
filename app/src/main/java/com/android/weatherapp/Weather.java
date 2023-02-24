@@ -74,11 +74,10 @@ public class Weather extends AsyncTask<String, Void, String> {
         super.onPostExecute(s);
 
         try{
-            // JSON Result stored in myObject
+
             JSONObject myObject = new JSONObject(result);
             Log.d("myObject", myObject.toString());
 
-            // City name and Country from JSON myObject
             JSONObject city = new JSONObject(myObject.getString("city"));
             String placeName = city.getString("name");
             Log.d("placeName", placeName);
@@ -86,45 +85,35 @@ public class Weather extends AsyncTask<String, Void, String> {
             Log.d("country", country);
             String location = placeName+", "+country;
 
-            // Accessing the "list" Array Object
             JSONArray list = myObject.getJSONArray("list");
             Log.d("list", list.toString());
 
-            // Accessing the 1st Object from the Array Object "list"
             JSONObject list0 = list.getJSONObject(0);
             Log.d("list0", list0.toString());
 
-            // Accessing the "weather" from an object of Array Object "list"
             JSONArray weather = list0.getJSONArray("weather");
             Log.d("weather", weather.toString());
 
-            // "description" and "icon" from "weather"
             String desc = weather.getJSONObject(0).getString("description");
             desc = desc.substring(0, 1).toUpperCase() + desc.substring(1);
             Log.d("desc", desc);
 
 
-            // Accessing the "main" from an object of Array Object "list"
             JSONObject main = list0.getJSONObject("main");
             Log.d("main", main.toString());
 
 
-            // MainTemp found
             double mainT = main.getDouble("temp");
             Log.d("mainTemp", Double.toString(mainT));
             int temp = (int) Math.round(mainT);
             String mainTemp = String.valueOf(temp) ;
 
-
-            // Humidity found
             String humidity = main.getString("humidity") + " %";
             Log.d("humidity", humidity);
 
-            // Pressure found
             String pressure = main.getString("pressure") + " hPa";
             Log.d("pressure", pressure);
 
-            // Wind Speed found
             JSONObject wind = list0.getJSONObject("wind");
             double windTemp = wind.getDouble("speed");
             windTemp = windTemp * 3.6;
@@ -133,7 +122,6 @@ public class Weather extends AsyncTask<String, Void, String> {
             Log.d("windSpeed", windSpeed);
 
 
-            // Visibility found
             int visible = list0.getInt("visibility");
             int tempVisible = visible/1000;
             String visibilityT = String.valueOf(tempVisible);
@@ -141,8 +129,6 @@ public class Weather extends AsyncTask<String, Void, String> {
             Log.d("visibility", visibility);
 
 
-            // 4 Day forecast
-            // JSONArray list = myObject.getJSONArray("list");
             List<String> day = new ArrayList<>();
             List<String> dayIcon = new ArrayList<>();
             List<String> dayTemp = new ArrayList<>();
@@ -166,8 +152,6 @@ public class Weather extends AsyncTask<String, Void, String> {
                 JSONObject mainLoop = listTemp.getJSONObject("main");
                 String timeLoop = listTemp.getString("dt_txt");
 
-
-                // Finding JSON data's hour
                 String[] timeSplit = timeLoop.split(" ");
                 String loopDate = timeSplit[0];
                 String[] loopDateList = loopDate.split("-");
@@ -178,7 +162,6 @@ public class Weather extends AsyncTask<String, Void, String> {
                 String hour = hourList[0];
                 Log.d("Hour: ", hour);
 
-                // Finding local time's hour
                 @SuppressLint("SimpleDateFormat") SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 Date date = new Date();
                 String currDateTemp = formatter.format(date);
@@ -197,17 +180,13 @@ public class Weather extends AsyncTask<String, Void, String> {
                 int dayNowInt = Integer.parseInt(dayNow);
                 int dayLoopInt = Integer.parseInt(dayLoop);
 
-                // Taking consideration of JSON time = 00:00:00
                 if (hourInt == 0 && currHourInt != 0){
                     hourInt = 24;
                 }
 
-                // Difference between local hour and data's hour
                 int diff = currHourInt - hourInt;
                 Log.d("Diff: ", String.valueOf(diff));
 
-
-                // Checks the diff between the current time with the data and take the least diff one from the same date.
                 if (diff >= 0 && diff < min && dayNowInt == dayLoopInt){
                     min = diff;
                     index = i;
@@ -215,16 +194,12 @@ public class Weather extends AsyncTask<String, Void, String> {
 
                 }
 
-
-                // Checks whether current day comes after prev day && time = 12PM and counter < 4 i.e. 4days forecast.
                 if (currTempDate.compareTo(currDate) > 0 && timeCheck.compareTo("12:00:00") == 0 && counter < 4){
                     currDate = currTempDate;
                     counter++;
                     Log.d("Dates", tempDate);
                     Log.d("Counter", String.valueOf(counter));
 
-
-                    // 4 Days name added to ArrayList
                     @SuppressLint("SimpleDateFormat") SimpleDateFormat simpleFormat = new SimpleDateFormat("yyyy-MM-dd");
                     @SuppressLint("SimpleDateFormat") Format f = new SimpleDateFormat("EEEE");
                     Date dateLoop = simpleFormat.parse(tempTime[0]);
@@ -232,8 +207,6 @@ public class Weather extends AsyncTask<String, Void, String> {
                     Log.d("Day: ", dayFoo);
                     day.add(dayFoo);
 
-                    
-                    // 4 Days temp added to ArrayList
                     double mainTempMin = mainLoop.getDouble("temp_min");
                     Log.d("mainTempMin", Double.toString(mainTempMin));
                     int tempCc = (int) Math.floor(mainTempMin);
@@ -246,7 +219,6 @@ public class Weather extends AsyncTask<String, Void, String> {
                     dayTemp.add(mainTempStr);
 
 
-                    // 4 Days icon added to ArrayList
                     JSONArray weatherLoop = listTemp.getJSONArray("weather");
                     String iconLoop = weatherLoop.getJSONObject(0).getString("icon");
                     Log.d("icon", iconLoop);
@@ -261,8 +233,6 @@ public class Weather extends AsyncTask<String, Void, String> {
             Log.d("Icon1: ", dayIcon.get(0));
 
             Log.d("Index: ", String.valueOf(index));
-
-
 
 
             int fiveHourIndex = index + 5;
@@ -301,7 +271,7 @@ public class Weather extends AsyncTask<String, Void, String> {
                     String hourT = String.valueOf(hourStr);
                     hour = hourT + " AM";
                 }
-                // hour to ArrayList hours
+
                 hours.add(hour);
 
                 double hourTempD = mainLoop.getDouble("temp");
@@ -309,18 +279,17 @@ public class Weather extends AsyncTask<String, Void, String> {
                 int tempInt = (int) Math.round(hourTempD);
                 String tempIntT = String.valueOf(tempInt);
                 String hourTemp = tempIntT + "°";
-                // hourTemp to ArrayList hoursTemp
+
                 hoursTemp.add(hourTemp);
 
                 JSONArray weatherLoop = listTemp.getJSONArray("weather");
                 String hourIcon = weatherLoop.getJSONObject(0).getString("icon");
                 Log.d("icon", hourIcon);
-                // hourIcon to ArrayList hoursIcon
+
                 hoursIcon.add(hourIcon);
 
             }
 
-            // Setting all info to views in MainActivity
             MainActivity.location.setText(location);
             MainActivity.mainTemp.setText(mainTemp);
             MainActivity.description.setText(desc);
@@ -330,7 +299,6 @@ public class Weather extends AsyncTask<String, Void, String> {
             MainActivity.windSpeed.setText(windSpeed);
 
 
-            // Setting Days' name, icon, and max & min temp
             MainActivity.day1.setText(day.get(0));
             MainActivity.day2.setText(day.get(1));
             MainActivity.day3.setText(day.get(2));
@@ -350,8 +318,6 @@ public class Weather extends AsyncTask<String, Void, String> {
             MainActivity.day3temp.setText(dayTemp.get(2));
             MainActivity.day4temp.setText(dayTemp.get(3));
 
-
-            // Setting hours, hours' icon, hours' temp
             MainActivity.hour1.setText(hours.get(0));
             MainActivity.hour2.setText(hours.get(1));
             MainActivity.hour3.setText(hours.get(2));

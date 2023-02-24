@@ -11,4 +11,12 @@
     <color name="light_blue_200">#FF81D4FA</color>
     <color name="light_blue_600">#FF039BE5</color>
     <color name="light_blue_900">#FF01579B</color>
+    <color name="background">#FFFFFFFF</color>
+    <color name="icon_drawable_color">#FF000000</color>
+    <color name="text_color_primary">#2E3440</color>
+    <color name="text_color_accent">#D8DEE9</color>
+    <color name="icon_color">#88C0D0</color>
+    <color name="button_color">#F39F86</color>
+    <color name="gradient_primary">#F39F86</color>
+    <color name="gradient_accent">#F9D976</color>
 </resources>

@@ -56,13 +56,15 @@ public class WeatherWidgetProvider extends AppWidgetProvider {
         String humidity = sharedPreferences.getString("humidity", "");
         String description = sharedPreferences.getString("desc", "");
         String city = sharedPreferences.getString("city", "");
-
+        String icon = sharedPreferences.getString("icon","");
 
         views.setTextViewText(R.id.temperatureTextView,  temperature);
         views.setTextViewText(R.id.windTextView,  description);
         views.setTextViewText(R.id.CitytextView,  city);
         views.setTextViewText(R.id.humidityTextview,humidity);
+        views.setImageViewResource(R.id.img_weather_ic,getWeatherIcon(icon));
         views.setOnClickPendingIntent(R.id.update,pendingUpdate);
+
 
 
         appWidgetManager.updateAppWidget(appWidgetIds, views);
@@ -100,6 +102,9 @@ public class WeatherWidgetProvider extends AppWidgetProvider {
                             String humidity = response.getJSONObject("main").getString("humidity") + " %";
                             String desc = response.getJSONArray("weather").getJSONObject(0).getString("description");
                             String city = response.getString("name") ;
+                            String icon = response.getJSONArray("weather").getJSONObject(0).getString("icon");
+
+
 
                             SharedPreferences sharedPreferences = context.getSharedPreferences("myPrefs", MODE_PRIVATE);
                             SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -107,6 +112,7 @@ public class WeatherWidgetProvider extends AppWidgetProvider {
                             editor.putString("humidity",humidity);
                             editor.putString("desc",desc);
                             editor.putString("city",city);
+                            editor.putString("icon",icon);
                             editor.apply();
 
 
@@ -129,5 +135,46 @@ public class WeatherWidgetProvider extends AppWidgetProvider {
         requestQueue.add(jsonObjectRequest);
     }
 
-
+    public int getWeatherIcon(String icon) {
+        switch (icon) {
+            case "01d":
+                return R.drawable.ic_01d;
+            case "01n":
+                return R.drawable.ic_01n;
+            case "02d":
+                return R.drawable.ic_02d;
+            case "02n":
+                return R.drawable.ic_02n;
+            case "03d":
+                return R.drawable.ic_03d;
+            case "03n":
+                return R.drawable.ic_03n;
+            case "04d":
+                return R.drawable.ic_04d;
+            case "04n":
+                return R.drawable.ic_04n;
+            case "09d":
+                return R.drawable.ic_09d;
+            case "09n":
+                return R.drawable.ic_09n;
+            case "10d":
+                return R.drawable.ic_10d;
+            case "10n":
+                return R.drawable.ic_10n;
+            case "11d":
+                return R.drawable.ic_11d;
+            case "11n":
+                return R.drawable.ic_11n;
+            case "13d":
+                return R.drawable.ic_13d;
+            case "13n":
+                return R.drawable.ic_13n;
+            case "50d":
+                return R.drawable.ic_50d;
+            case "50n":
+                return R.drawable.ic_50n;
+            default:
+                return R.drawable.ic_unknown;
+        }
+    }
 }
