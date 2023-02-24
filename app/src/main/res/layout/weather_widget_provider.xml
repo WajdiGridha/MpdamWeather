@@ -1,0 +1,78 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/widgetProvider">
+    <TextView
+        android:id="@+id/temperatureTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:text="0 °C"/>
+
+    <TextView
+        android:id="@+id/windTextView"
+        android:layout_width="201dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginStart="89dp"
+        android:layout_marginLeft="89dp"
+        android:layout_marginEnd="121dp"
+        android:layout_marginRight="121dp"
+        android:text="0"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/CitytextView"
+        android:layout_width="187dp"
+        android:layout_height="44dp"
+        android:layout_below="@+id/windTextView"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="55dp"
+        android:layout_marginEnd="215dp"
+        android:layout_marginRight="215dp"
+        android:text="TextView"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/humidityTextview"
+        android:layout_width="wrap_content"
+        android:layout_height="33dp"
+        android:layout_alignBottom="@+id/CitytextView"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginStart="205dp"
+        android:layout_marginLeft="205dp"
+        android:layout_marginEnd="74dp"
+        android:layout_marginRight="74dp"
+        android:layout_marginBottom="4dp"
+        android:layout_toEndOf="@+id/temperatureTextView"
+        android:layout_toRightOf="@+id/temperatureTextView"
+        android:text="TextView"
+        android:textSize="23sp" />
+
+    <ImageView
+        android:id="@+id/update"
+        android:layout_width="71dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/CitytextView"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginStart="107dp"
+        android:layout_marginLeft="107dp"
+        android:layout_marginEnd="234dp"
+        android:layout_marginRight="234dp"
+        android:layout_marginBottom="-67dp"
+        android:src="@drawable/refresh"
+        />
+
+</RelativeLayout>
